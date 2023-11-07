@@ -1,1 +1,1 @@
-# Learning Rust on my free time.
+# Learning Rust.

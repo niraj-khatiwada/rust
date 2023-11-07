@@ -1,22 +1,28 @@
-struct Person {
-    name: String,
+#[derive(Debug)]
+struct Transaction {
+    id: i32,
+    uuid: String,
+    result: Result<i32, String>,
 }
 
-impl Person {
-    fn alter_person() -> Self {
-        return Self {
-            name: "Suraj".to_string()
-        };
-    }
-    fn print_name(&self) {
-        println!("{:?}", self.name)
+impl Transaction {
+    fn new(id: i32, uuid: &str) -> Result<Self, &str> {
+        if id > 0 {
+            return Ok(Self {
+                id,
+                uuid: String::from(uuid),
+                result: Ok(id),
+            });
+        }
+        return Err("id must be greater than 0.");
     }
 }
 
 fn main() {
-    let person = Person { name: "Niraj".to_string() };
-    person.print_name();
-    let new_person = Person::alter_person();
-    new_person.print_name()
+    let transaction1 = Transaction::new(1, "primeagen");
+    let transaction2 = Transaction::new(-1, "blazing_fast");
+
+    println!("{:?}", transaction1);
+    println!("{:?}", transaction2);
 }
 

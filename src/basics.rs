@@ -29,6 +29,13 @@ fn main() {
         println!("{i}");
         i += 1;
     }
+    fn main() {
+        let nums = vec![1, 2, 3, 4, 5];
+
+        for num in nums {
+            println!("{:?}", num)
+        }
+    }
 }
 
 
