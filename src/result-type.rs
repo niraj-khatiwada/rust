@@ -30,11 +30,49 @@
 // }
 
 
+// #[derive(Debug)]
+// struct Transaction {
+//     id: i32,
+//     uuid: String,
+//     result: Result<i32, String>,
+// }
+//
+// impl Transaction {
+//     fn new(id: i32, uuid: &str) -> Result<Self, &str> {
+//         if id > 0 {
+//             return Ok(Self {
+//                 id,
+//                 uuid: String::from(uuid),
+//                 result: Ok(id),
+//             });
+//         }
+//         return Err("id must be greater than 0.");
+//     }
+// }
+//
+// fn main() {
+//     let transaction1 = Transaction::new(1, "primeagen");
+//     let transaction2 = Transaction::new(-1, "blazing_fast");
+//
+//     println!("{:?}", transaction1);
+//     println!("{:?}", transaction2);
+// }
+//
+
+
+use rand::Rng;
+
 #[derive(Debug)]
 struct Transaction {
     id: i32,
     uuid: String,
     result: Result<i32, String>,
+}
+
+#[derive(Debug)]
+enum AuthStatus {
+    Allow,
+    Deny,
 }
 
 impl Transaction {
@@ -50,11 +88,29 @@ impl Transaction {
     }
 }
 
-fn main() {
-    let transaction1 = Transaction::new(1, "primeagen");
-    let transaction2 = Transaction::new(-1, "blazing_fast");
 
-    println!("{:?}", transaction1);
-    println!("{:?}", transaction2);
+fn main() {
+    // let transaction1 = Transaction::new(1, "primeagen");
+    // let transaction2 = Transaction::new(-1, "blazing_fast");
+    //
+    // println!("{:?}", transaction1);
+    // println!("{:?}", transaction2);
+
+    println!("{:?}", authorize());
 }
 
+
+fn connect_db() -> Result<String, String> {
+    let random = rand::thread_rng().gen_range(0..=100);
+
+    if random % 2 == 0 {
+        return Ok(String::from("Connected!"));
+    }
+    return Err(String::from("Cannot connect to database"));
+}
+
+fn authorize() -> Result<AuthStatus, String> {
+    let db = connect_db()?; // This will only work and proceed when result is Ok()
+    println!("{:?}", db); // This won't be printed when db throws error. Instead this function will automatically return the Err() from db in above line when error occurs in connect_db.
+    return Ok(AuthStatus::Allow);
+}
