@@ -5,5 +5,10 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "libs"
+path = "src/libs/mod.rs"
+
 [dependencies]
 rand = "0.8.5"
+humantime = "2.0.1"

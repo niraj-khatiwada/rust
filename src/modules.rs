@@ -1,7 +1,8 @@
 // This HashMap is only available in main function not in modules.
 use std::collections::HashMap;
 
-mod greet {
+// These are called inline modules
+pub mod greet {
     use std::collections::HashMap;
 
     pub fn main() {
