@@ -69,8 +69,12 @@ fn greet(animal: impl Noise) {
 }
 
 
-fn perimeter(shape: impl Perimeter) -> i32 {
+// one way to implement
+// fn perimeter(shape: impl Perimeter) -> i32 {
+//     return shape.calculate_perimeter();
+// }
+
+// Generics way: Recommended
+fn perimeter<T: Perimeter>(shape: T) -> i32 {
     return shape.calculate_perimeter();
 }
-
-
