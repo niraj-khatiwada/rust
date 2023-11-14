@@ -1,67 +1,29 @@
-// Trait Objects are used to make a heterogeneous collection, a collection having different types
-
-trait Noise {
-    fn make_noise(&self);
+#[derive(Debug)]
+enum Part {
+    Bolt,
+    Panel,
 }
 
-struct Car;
-
-impl Noise for Car {
-    fn make_noise(&self) {
-        println!("Car: Vroom Vroom")
-    }
+struct RobotArm<'a> {
+    part: &'a Part, // To access a borrowed value in struct, you must specify the lifetime of the ownership
 }
 
-struct Bike;
-
-impl Noise for Bike {
-    fn make_noise(&self) {
-        println!("Bike: Vroom Vroom")
-    }
+struct AssemblyLine {
+    parts: Vec<Part>,
 }
 
-fn borrow_vehicle(obj: &dyn Noise) {
-    obj.make_noise();
-}
-
-fn borrow_vehicle_box(obj: Box<dyn Noise>) {
-    obj.make_noise();
+// By default, this is what happens under the hood of ownership. We are just explicitly assigning a lifetime which is ellided(altered) by the compiler automatically.
+fn borrow_part<'a>(arg: &'a Part) -> &'a Part {
+    println!("{:?}", arg);
+    return arg;
 }
 
 fn main() {
-    // let list = vec! {Bike, Car}; -> This won't compile because we can only have similar types in a collection
-
-    let car: Box<dyn Noise> = Box::new(Car);
-    let bike: Box<dyn Noise> = Box::new(Bike);
-
-    let list = vec! {car, bike}; // Now this will compile
-    for item in list {
-        item.make_noise();
-    }
-
-    let car2: Box<dyn Noise> = Box::new(Car);
-    let bike2: Box<dyn Noise> = Box::new(Bike);
-    let mut list2: Vec<Box<dyn Noise>> = Vec::new();
-    list2.push(car2);
-    list2.push(bike2);
-
-
-    // Passing parameters in function
-    let c = Car;
-    borrow_vehicle(&c);
-    let b = Bike;
-    borrow_vehicle(&b);
-
-    // The above method is for borrowing trait objects.
-    // We can also move trait objects using Box
-    let car3: Box<dyn Noise> = Box::new(Car);
-    let bike3: Box<dyn Noise> = Box::new(Bike);
-    borrow_vehicle_box(car3);
-    borrow_vehicle_box(bike3);
+    let line = AssemblyLine { parts: vec![Part::Bolt, Part::Panel] };
+    {
+        let arm = RobotArm { part: &line.parts[0] };
+        println!("{:?}", arm.part);
+    };
+    borrow_part(&line.parts[0]);
 }
-
-
-
-
-
 
