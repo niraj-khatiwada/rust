@@ -12,3 +12,5 @@ path = "src/libs/mod.rs"
 [dependencies]
 rand = "0.8.5"
 humantime = "2.0.1"
+thiserror = "1.0.50"
+chrono = "0.4.31"
