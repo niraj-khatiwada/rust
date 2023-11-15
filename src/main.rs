@@ -1,29 +1,56 @@
+#[derive(Debug, PartialEq)]
+enum City {
+    London,
+    California,
+    Kathmandu,
+}
+
 #[derive(Debug)]
-enum Part {
-    Bolt,
-    Panel,
+struct IDCard {
+    name: String,
+    age: u8,
+    city: City,
 }
 
-struct RobotArm<'a> {
-    part: &'a Part, // To access a borrowed value in struct, you must specify the lifetime of the ownership
+impl IDCard {
+    fn new(name: &str, age: u8, city: City) -> Self {
+        return Self {
+            name: String::from(name),
+            age,
+            city,
+        };
+    }
 }
 
-struct AssemblyLine {
-    parts: Vec<Part>,
+#[derive(Debug)]
+struct Goats<'a>(Vec<&'a IDCard>);
+
+impl<'a> Goats<'a> {
+    fn living_in_london(&self) -> Self {
+        Self { 0: self.0.iter().filter(|id| id.city == City::London).map(|id| *id).collect() }
+    }
 }
 
-// By default, this is what happens under the hood of ownership. We are just explicitly assigning a lifetime which is ellided(altered) by the compiler automatically.
-fn borrow_part<'a>(arg: &'a Part) -> &'a Part {
-    println!("{:?}", arg);
-    return arg;
-}
+#[derive(Debug)]
+struct Ages(Vec<u8>);
 
 fn main() {
-    let line = AssemblyLine { parts: vec![Part::Bolt, Part::Panel] };
-    {
-        let arm = RobotArm { part: &line.parts[0] };
-        println!("{:?}", arm.part);
-    };
-    borrow_part(&line.parts[0]);
+    let ids = vec![IDCard::new("Michael Scott", 46, City::London), IDCard::new("Dwight Schrute", 45, City::California), IDCard::new("Niraj Khatiwada", 26, City::Kathmandu)];
+
+    let goats = Goats(ids.iter().filter(|id| id.age > 40).collect());
+
+    println!("\nGoats");
+    for goat in goats.0.iter() {
+        println!("{:?}", goat)
+    }
+
+    println!("\nLiving in London");
+    for goat_london in goats.living_in_london().0.iter() {
+        println!("{:?}", goat_london);
+    }
+
+    // This is a copy which is not working on original ids.
+    let ages = Ages(ids.iter().map(|id| id.age).collect());
+    println!("{:?}", ages)
 }
 
