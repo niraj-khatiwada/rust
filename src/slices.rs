@@ -16,7 +16,38 @@ fn main() {
 
     println!("Sum is {}", sum(&list));
     println!("Sum of slice is {}", sum(&slice));
+
+
+    // Slice Patterns
+    let chars = ['a', 'b', 'c', 'd', 'e'];
+    // let chars = [];
+
+    // We can also do chars.as_slice() instead of &chars[..]
+    let first = match &chars[..] {
+        [first, ..] => first,
+        _ => &' '
+    };
+    println!("First element is {}", first);
+
+    let last = match &chars[..] {
+        [.., last] => last,
+        _ => &' '
+    };
+    println!("Last element is {}", last);
+
+    // Advanced patterns
+    match &chars[..] {
+        [first @ 'a'..='b', rest @ ..] => println!("First element is {}. Rest is {:?}", first, rest),
+        _ => ()
+    }
+
+    let mut all_chars = String::from("");
+    for e in 'a'..='z' {
+        all_chars += &*e.to_string()
+    }
+    println!("All characters {}", all_chars)
 }
+
 
 // If you don't know thw size of args beforehand, you can ignore the size parameter in array here. But usually, we will use vector for dynamic array. Only use [] for fixed size.
 fn sum(args: &[i32]) -> i32 {
