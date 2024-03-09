@@ -1,24 +1,12 @@
 [package]
-name = "blazing_fast"
+name = "practice"
 version = "0.1.0"
 edition = "2021"
 
-
-[lib]
-name = "libs"
-path = "src/libs/mod.rs"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rand = "0.8.5"
-humantime = "2.0.1"
-thiserror = "1.0.50"
-chrono = "0.4.31"
-crossbeam-channel = "0.5.8"
-futures = "0.3.29"
-tokio = { version = "1.0.0", features = ["rt", "rt-multi-thread", "macros"] }
-parking_lot = "0.12.1"
-dotenvy = "0.15.7"
-serde = { version = "1.0.192", features = ["derive"] }
-serde_json = "1.0.108"
-rayon = "1.8.0"
-tracing = "0.1.40"
+
+[[bin]]
+name = "practice"
+path = "main.rs"
