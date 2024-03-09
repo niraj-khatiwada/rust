@@ -1,5 +1,5 @@
-// #[derive(PartialEq)]
 // enum Status {
+// #[derive(PartialEq)]aa
 //     Active,
 //     Inactive,
 // }
@@ -7,8 +7,8 @@
 // fn main() {
 //     let abc: Status = Status::Inactive;
 //     let is_active: bool = if abc == Status::Active { true } else { false };
-//     println!("Is abc active? {}", is_active);
 
+//     println!("Is abc active? {}", is_active);
 //     let is_inactive: bool = match abc {
 //         Status::Active => false,
 //         _ => true,
