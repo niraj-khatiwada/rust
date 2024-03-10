@@ -1,32 +1,27 @@
-#[derive(Debug)]
-struct User {
-    id: i32,
-    name: String,
+enum Status {
+    Active,
+    Inactive,
 }
 
 fn main() {
-    let num = maybe_num().map(|num| num + 1).map(|num| num + 10);
-    match num {
-        Some(n) => println!("Num is {:?}", n),
-        _ => {}
+    let maybe_user = Some("Niraj");
+
+    match maybe_user {
+        Some(name) => println!("{:?}", name),
+        None => (),
     }
 
-    let username = "niraj";
-    let user = find_user(username).map(|user_id| User {
-        id: user_id,
-        name: String::from(username),
-    });
-    println!("{:?}", user)
-}
+    // Alternative way if we only care about Some(_) value then
+    if let Some(name) = maybe_user {
+        println!("{:?}", name);
+    }
+    // You can still use else here but it is exactly same as match
+    // else {}
 
-fn maybe_num() -> Option<i32> {
-    Some(100)
-}
-
-fn find_user(name: &str) -> Option<i32> {
-    match name {
-        "niraj" => Some(1),
-        "suraj" => Some(2),
-        _ => None,
+    let status: Status = Status::Active;
+    if let Status::Inactive = status {
+        println!("Active")
+    } else {
+        println!("Inactive")
     }
 }
