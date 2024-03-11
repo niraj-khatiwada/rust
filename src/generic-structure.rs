@@ -1,3 +1,5 @@
+// Structure having generics
+
 #[derive(Debug)]
 struct Person<T, U> {
     name: T,
