@@ -19,7 +19,7 @@ fn main() {
         match selected_number {
             1 => {
                 let new_bill = add_prompt();
-                add_bill(new_bill, &mut database);
+                add_bill(&new_bill, &mut database);
             }
             2 => {
                 let id = view_prompt();
@@ -71,22 +71,21 @@ Enter your selection: "
     Ok(selected_number)
 }
 
-fn add_bill(bill: Bill, database: &mut Database) {
+fn add_bill(bill: &Bill, database: &mut Database) {
     let Ok(time_since_epoch) = SystemTime::now().duration_since(UNIX_EPOCH) else {
         panic!("Something went wrong while adding bill.")
     };
-    database.insert(time_since_epoch.as_secs(), bill);
+    database.insert(time_since_epoch.as_secs(), bill.clone());
     println!("New bill added successfully!")
 }
 
 fn add_prompt() -> Bill {
-    let mut name = String::new();
-    let mut amount: f64 = 0.00;
+    let name: String;
+    let amount: f64;
 
     loop {
         println!("Enter bill name: ");
-        let bill_name = take_input();
-        name = bill_name;
+        name = take_input();
         break;
     }
 
@@ -134,18 +133,29 @@ fn view_prompt() -> u64 {
 
 fn update_bill(bill: &Bill, database: &mut Database) {
     let _bill: Option<&Bill> = view_bill(bill.id, database);
-    let Some(b) = _bill else {
+    let Some(_) = _bill else {
         println!("Bill with that id not found.");
         return;
     };
-    database.insert(bill.id, bill.clone());
+
+    // One way is to mutate by match using get_mut
+    match database.get_mut(&bill.id) {
+        Some(matched_bill) => {
+            matched_bill.name = bill.name.to_owned();
+            matched_bill.amount = bill.amount;
+        }
+        None => (),
+    }
+    // Another way is to just enter the new value. Downside of this is, if you want to just mutate one entry, you have to create whole new struct. So prefer above.
+    // database.insert(bill.id, bill.clone());
     print!("Data updated successfully!")
 }
 
 fn update_prompt() -> Bill {
-    let mut name = String::new();
-    let mut amount: f64 = 0.00;
-    let mut bill_id = 0;
+    let name: String;
+    let amount: f64;
+    let bill_id: u64;
+
     loop {
         println!("Enter bill id: ");
         let bill_id_raw = take_input();
