@@ -1,29 +1,22 @@
-// fn main() {
-//     let mut count = 1;
-//     loop {
-//         if count == 10 {if count == 10 {if count == 10 {if count == 10 {if count == 10 {if count == 10 {
-//             break;
-//         }
-//         println!(
-//             "[Loop]: This will break before count 10. Current count is {}",
-//             count
-//         );
-//         count += 1;
-//     }
+fn main() {
+    let mut num = 0;
+    'a: loop {
+        println!("Hello World");
+        num += 1;
+        if num >= 10 {
+            break 'a;
+        }
+    }
 
-//     while count >= 10 {
-//         if count == 20 {
-//             break;
-//         }
-//         println!(
-//             "[While loop]: This will break before count 20. Current count is {}",
-//             count
-//         );
-//         count += 1;
-//     }
+    let mut num2 = 0;
+    while num2 < 10 {
+        println!("Hello World");
+        num2 += 1;
+    }
 
-//     let mut array: Vec<i32> = vec![1, 2, 3, 4];
-//     for num in &array {
-//         println!("{}", num)
-//     }
-// }
+    let list: Vec<i32> = vec![1, 2, 3];
+
+    for i in list {
+        println!("Hello World {}", i)
+    }
+}

@@ -1,25 +1,23 @@
-// #[derive(Debug)]
-// enum Gender {
-//     Male,
-//     Female,
-// }
+#[derive(Debug)]
+enum Gender {
+    Male,
+    Female,
+    HowDareYou,
+}
 
-// #[derive(Debug)]
-// struct User {
-//     name: String,
-//     age: i8,
-//     gender: Gender,
-// }
+#[derive(Debug)]
+struct Person {
+    name: String,
+    age: u8,
+    gender: Gender,
+}
 
-// fn main() {
-//     let user: User = User {
-//         name: "Niraj".to_string(),
-//         age: 100,
-//         gender: Gender::Male,
-//     };
+fn main() {
+    let person: Person = Person {
+        name: String::from("niraj"),
+        age: 26,
+        gender: Gender::Male,
+    };
 
-//     println!("{:?}", user);
-//     println!("Name = {:?}", user.name);
-//     println!("Age = {:?}", user.age);
-//     println!("Gender = {:?}", user.gender);
-// }
+    println!("{person:?}");
+}

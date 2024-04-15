@@ -1,26 +1,30 @@
-// fn main() {
-//     // Boolean
-//     let mut boolean = true;
-//     boolean = false;
-//     println!("{:?}", boolean);
+fn main() {
+    // Unsigned Integer
+    let integer_unsigned: u8 = 255;
+    println!("{}", integer_unsigned);
 
-//     // Integer
-//     let mut number: i32 = 100;
-//     number = 200;
-//     println!("{number:?}");
+    // Signed Integer
+    let integer_signed: i16 = -255;
+    println!("{}", integer_signed);
 
-//     // Floats
-//     let mut decimal: f64 = 100.00;
-//     decimal = 200.01;
-//     println!("{decimal}");
+    // Decimal
+    let decimal: f64 = 3.01;
+    println!("{}", decimal);
 
-//     // Character
-//     let mut char = 'a';
-//     char = 'b';
-//     println!("{char}");
+    // Character
+    let character: char = 'a';
+    println!("{}", character);
 
-//     // String
-//     let mut string = "Niraj";
-//     string = "Suraj";
-//     println!("{string}")
-// }
+    // Boolean
+    let boolean: bool = true;
+    println!("{}", boolean);
+
+    // String
+    let text: String = String::from("Hello World");
+    println!("{}", text);
+
+    let your_half = String::from("YOURS");
+    let mut my_half = your_half;
+    my_half = String::from("MINE");
+    println!("{my_half}")
+}

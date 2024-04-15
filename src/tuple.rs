@@ -1,15 +1,19 @@
-// fn main() {
-//     let array = (1, 10);
-//     println!("By Index: {}, {}", array.0, array.1);
-//     println!("Array: {array:?}");
+fn main() {
+    let tuple: [i32; 3] = [1, 2, 3];
 
-//     // Destructure
-//     let (a1, a2) = array;
-//     println!("Destructured: a1={a1}, a2={a2}");
+    for i in tuple {
+        println!("{i}")
+    }
 
-//     println!("Return Type Tuple: {:?}", get_tuple(a1, a2));
-// }
+    let (one, two, three) = one_two_three();
+    println!("{one}{two}{three}");
 
-// fn get_tuple(a1: i8, a2: i8) -> (i8, i8) {
-//     return (a1, a2);
-// }
+    let _tuple = one_two_three();
+    println!("{}", _tuple.0);
+    println!("{}", _tuple.1);
+    println!("{}", _tuple.2);
+}
+
+fn one_two_three() -> (i32, i32, i32) {
+    (1, 2, 3)
+}
