@@ -9,4 +9,12 @@ fn main() {
         println!("Hurray! {}", boolean);
         n += 1;
     }
+
+    let list: Vec<i32> = vec![1, 2, 3];
+
+    let mut list_iter = list.iter();
+
+    while let Some(value) = list_iter.next() {
+        println!("Value is {value}");
+    }
 }
