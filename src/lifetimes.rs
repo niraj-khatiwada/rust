@@ -19,7 +19,7 @@ struct MainHouse {
 struct WareHouse<'a> {
     part: &'a Part,
 }
-
+// if the strict has lifetimes, it's impl should have as well
 impl<'a> WareHouse<'a> {
     fn print_part(&self) {
         println!("Warehouse has {:?} part", self.part);
