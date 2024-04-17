@@ -1,56 +1,13 @@
-#[derive(Debug)]
-struct Person<'a> {
-    name: &'a str,
-}
-#[derive(Debug)]
-enum Part {
-    Bolt,
-    Hammer,
-    Rope,
-}
-
-#[derive(Debug)]
-struct MainHouse {
-    part: Part,
-}
-
-// Here, the ware house need to share the same parts
-#[derive(Debug)]
-struct WareHouse<'a> {
-    part: &'a Part,
-}
-
-impl<'a> WareHouse<'a> {
-    fn print_part(&self) {
-        println!("Warehouse has {:?} part", self.part);
-    }
+enum Error {
+    NetworkError(u16),
+    MechanicalError,
 }
 
 fn main() {
-    let mut person = Person { name: "Niraj" };
-    borrow_person(&mut person);
-    println!("Name = {:?}", person);
+    let error = Error::NetworkError(200); // or 400
 
-    // Automobiles
-
-    // Let's say a part was borrowed by main house first
-    let mainhouse = MainHouse { part: Part::Bolt };
-
-    {
-        let warehouse = WareHouse {
-            part: &mainhouse.part,
-        };
-        warehouse.print_part();
+    match error {
+        Error::NetworkError(code @ 200 | code @ 404) => println!("Status code is {code}"),
+        _ => {}
     }
-    // At this point, the warehouse does not exist and is already destroyed. However, the borrowed Part::Bolt will still be there.
-    println!("Mainhouse has {:?} part", mainhouse.part);
-    borrow_part(&mainhouse.part);
-}
-
-fn borrow_person(person: &mut Person) {
-    *person = Person { name: "King" }
-}
-
-fn borrow_part<'a>(part: &'a Part) {
-    println!("Borrowed part by function {:?}", part)
 }

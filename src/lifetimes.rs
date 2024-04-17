@@ -45,6 +45,8 @@ fn main() {
     // At this point, the warehouse does not exist and is already destroyed. However, the borrowed Part::Bolt will still be there.
     println!("Mainhouse has {:?} part", mainhouse.part);
     borrow_part(&mainhouse.part);
+
+    println!("{:?}", longest_string("halo", "world"));
 }
 
 fn borrow_person(person: &mut Person) {
@@ -53,4 +55,12 @@ fn borrow_person(person: &mut Person) {
 
 fn borrow_part<'a>(part: &'a Part) {
     println!("Borrowed part by function {:?}", part)
+}
+
+fn longest_string<'a>(one: &'a str, two: &'a str) -> &'a str {
+    if one.len() > two.len() {
+        one
+    } else {
+        two
+    }
 }
