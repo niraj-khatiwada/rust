@@ -1,25 +1,14 @@
 use std::str::FromStr;
 
-// Convert string slice to any type
+use chrono::{DateTime, NaiveDate, NaiveDateTime, NaiveTime, Utc};
 
-#[derive(Debug)]
-struct Person(String);
-
-impl FromStr for Person {
-    type Err = String;
-
-    fn from_str(any_string: &str) -> Result<Self, Self::Err> {
-        let random_boolean: bool = rand::random();
-        if random_boolean {
-            return Ok(Self(String::from(any_string)));
-        } else {
-            return Err(String::from("Lol"));
-        }
-    }
-}
-
+// Naive date means date with format 2024-04-20T23:04:59 without timezone
 fn main() {
-    let person = Person::from_str("Niraj");
+    // let naive_date = NaiveDate::from_ymd_opt(2024, 4, 20).unwrap();
+    // let naive_time = NaiveTime::from_hms_opt(23, 4, 59).unwrap();
+    // println!("{:?}", NaiveDateTime::new(naive_date, naive_time)); // This will return "2024-04-20T23:04:59"
 
-    println!("{:?}", person)
+    let d: DateTime<Utc> = DateTime::from_str("2024-04-19T00:00:00Z").unwrap();
+
+    println!("{:?}", d)
 }
