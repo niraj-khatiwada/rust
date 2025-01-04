@@ -25,7 +25,10 @@ fn main() {
     let is_correct = true;
 
     // character
+    // 1 char = 4 bytes. Why 4 bytes for a character? 4 bytes is used to cover all types of unicode characters. Remember emojis are also trated as character.
     let character = 'a';
+    let char_code: u32 = character.into();
+    dbg!(char_code); // 97
 }
 
 fn print_name(mut name: &str) {

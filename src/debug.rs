@@ -10,6 +10,8 @@ fn main() {
         age: 27,
     };
     println!("{:?}", me);
+    println!("{:#?}", me); // # Pretty prints
+    dbg!("{:?}", me);
 
     // Positional arguments
     let first = "1st";

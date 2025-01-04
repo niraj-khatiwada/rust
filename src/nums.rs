@@ -33,4 +33,24 @@ fn main() {
 
     println!("{}", num);
     println!("{}", num2);
+
+    // Format Specifiers
+    // 1. Floating precision
+    #[allow(clippy::approx_constant)]
+    let _pi: f64 = 3.14159265;
+    let precision = format!("{:.2}", _pi);
+    match precision.as_str() {
+        "3.14" => println!("People usually know me this far only."),
+        _ => println!("My name is Jeff!"),
+    }
+
+    // Integer to Float
+    let int = 100;
+    let flt = int as f64;
+    dbg!(flt);
+
+    // Float to Integer
+    let flt = 100.01;
+    let int = flt as i32;
+    dbg!(int);
 }
