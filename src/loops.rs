@@ -1,22 +1,39 @@
 fn main() {
-    let mut num = 0;
-    'a: loop {
-        println!("Hello World");
-        num += 1;
-        if num >= 10 {
-            break 'a;
+    let mut num = 1e3 as i32;
+    // Infinite Loop
+    loop {
+        println!("{}", num);
+        num -= 1;
+        if num == 0 {
+            break;
         }
     }
 
-    let mut num2 = 0;
-    while num2 < 10 {
-        println!("Hello World");
-        num2 += 1;
+    // While loops
+    while num > 0 {
+        println!("{}", num);
+        num -= 1;
+        if num == 0 {
+            break;
+        }
     }
 
-    let list: Vec<i32> = vec![1, 2, 3];
+    // For loops
+    for n in 0..num {
+        println!("{}", n);
+    }
 
-    for i in list {
-        println!("Hello World {}", i)
+    // Labelled Block Expressions
+    'outer: for n in 0..num {
+        println!("{}", n);
+        'inner: for n in 0..num {
+            println!("{}", n);
+            if n == 2 {
+                break 'inner;
+            }
+        }
+        if n == 100 {
+            break 'outer;
+        }
     }
 }

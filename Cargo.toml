@@ -20,7 +20,3 @@ tracing = "0.1.40"
 [[bin]]
 name = "practice"
 path = "main.rs"
-
-[lib]
-name = "lib"
-path = "./src/lib/mod.rs"
