@@ -17,6 +17,10 @@ thiserror = "1.0.58"
 tokio = { version = "1.37.0", features = ["full"] }
 tracing = "0.1.40"
 
+[lib]
+name = "lib"
+path = "./src/lib/mod.rs"
+
 [[bin]]
 name = "practice"
 path = "main.rs"
