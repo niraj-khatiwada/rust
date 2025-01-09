@@ -1,28 +1,18 @@
 fn main() {
-    let search = find_row("Rust");
-    if let Some(val) = search {
-        println!("Found: {}", val);
-    }
-
-    let search2 = find_row_or_throw("Russt");
-    match search2 {
+    let search2 = find_row_or_throw("Rust");
+    match &search2 {
         Ok(rs) => println!("Found: {}", rs),
         Err(err) => println!("Error: {}", err),
     }
-}
-
-/// Finds a value based on the search term. If not found, returns None.
-fn find_row(name: &str) -> Option<String> {
-    if name == "Rust" {
-        return Some(String::from("Rust is king!"));
-    }
-    None
+    // Map combinator
+    let transform = search2.map(|rs| format!("{}!!!", rs));
+    println!("{}", transform.unwrap());
 }
 
 /// Finds a value based on the search term. If not found, throws error.
 fn find_row_or_throw(name: &str) -> Result<String, String> {
     if name == "Rust" {
-        return Ok(String::from("Rust is king!"));
+        return Ok(String::from("Rust is king"));
     }
     Err(String::from("Not found."))
 }
