@@ -45,3 +45,28 @@ fn find_row(name: &str) -> Option<String> {
     }
     None
 }
+
+// Creating Option enum manually
+#[derive(Debug, PartialEq)]
+enum OptionType<T> {
+    SomeType(T),
+    NoneType,
+}
+
+impl<T> OptionType<T> {
+    fn unwrap(&self) -> &T {
+        match self {
+            OptionType::SomeType(val) => val,
+            _ => panic!("None value found."),
+        }
+    }
+}
+
+fn main() {
+    let val = OptionType::SomeType("Rust").unwrap();
+    let val: &usize = OptionType::NoneType.unwrap(); // panics
+}
+
+fn get_value() -> OptionType<String> {
+    OptionType::SomeType(String::from("Hello"))
+}
