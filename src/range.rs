@@ -20,4 +20,20 @@ fn main() {
     for i in alphabets {
         println!("{i}");
     }
+
+    use std::ops::Range;
+
+    let range: Range<i32> = 1..100;
+    for i in range {
+        println!("{}", i);
+    }
+
+    let range_vec: Vec<i32> = (1..=100).collect();
+    dbg!(range_vec);
+
+    for alpha in 'a'..='z' {
+        println!("{}", alpha);
+    }
+    let alpha_vec: Vec<char> = ('a'..='z').collect();
+    dbg!(alpha_vec);
 }
