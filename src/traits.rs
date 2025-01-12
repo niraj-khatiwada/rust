@@ -1,4 +1,5 @@
 trait LivingThing {
+    const PI: f32 = 3.14;
     fn get_name(&self) -> &String;
 }
 
@@ -7,7 +8,9 @@ struct Human {
 }
 
 impl LivingThing for Human {
+    const PI: f32 = 3.1415;
     fn get_name(&self) -> &String {
+        println!("PI {}", Self::PI);
         &self.name
     }
 }
@@ -25,6 +28,7 @@ struct Animal {
 }
 
 impl LivingThing for Animal {
+    const PI: f32 = 3.141516; // just for example
     fn get_name(&self) -> &String {
         &self.name
     }
@@ -43,6 +47,7 @@ enum LivingCreature {
 }
 
 impl LivingThing for LivingCreature {
+    const PI: f32 = 3.14151617; // just for example
     fn get_name(&self) -> &String {
         match self {
             Self::Human(name) => name,
