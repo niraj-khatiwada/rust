@@ -25,11 +25,12 @@ fn main() {
     let mustang = Arc::new(Vehicle::from("Mustang"));
 
     let left_door = Door {
-        vehicle: Arc::clone(&mustang), // new reference to mustang
+        // vehicle: mustang.clone(), // new reference to mustang
+        vehicle: Arc::clone(&mustang), // We can also clone like this
     };
 
     let right_door = Door {
-        vehicle: Arc::clone(&mustang), // new reference to mustang
+        vehicle: mustang.clone(), // new reference to mustang
     };
 
     drop(mustang);
