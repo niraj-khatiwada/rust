@@ -3,15 +3,15 @@ trait Tax {
     const TAX_RATE: f64 = 0.25;
 
     // Getter
-    // Here, amount() method is called a getter method since it's trying to get a data that cut_tax() method logic utilizes
+    // Here, amount() method is called a getter method since it's trying to get a data that tax_amount() method logic utilizes
     // We do not need to enforce amount property to exist in struct or enum. This method abstracts the logic to apply the tax rate to any amount that the original data type needs to define by themselves
     fn amount(&self) -> f64;
 
     // Setter
     fn set_amount(&mut self, new_amount: f64) -> f64;
 
-    // default getter logic for method .cut_tax()
-    fn cut_tax(&self) -> f64 {
+    // default getter logic for method .tax_amount()
+    fn tax_amount(&self) -> f64 {
         self.amount() * Self::TAX_RATE
     }
 
@@ -63,7 +63,7 @@ fn main() {
         bonus: 100.0,
     };
     println!("Income before tax {}", income.amount());
-    println!("Income after tax {}", income.amount() - income.cut_tax());
+    println!("Income after tax {}", income.amount() - income.tax_amount());
 
     // Salary doubled
     income.double_amount();
@@ -71,7 +71,7 @@ fn main() {
     println!("Income before tax {} after salary hike", income.amount());
     println!(
         "Income after tax {} after salary hike",
-        income.amount() - income.cut_tax()
+        income.amount() - income.tax_amount()
     );
 
     let mut land = Land {
@@ -79,12 +79,12 @@ fn main() {
         vat: 100.0,
     };
     println!("Land before tax {}", land.amount());
-    println!("Land after tax {}", land.amount() - land.cut_tax());
+    println!("Land after tax {}", land.amount() - land.tax_amount());
 
     land.set_amount(50000.0);
     println!("Land before tax {} after market down", land.amount());
     println!(
         "Land after tax {} after market down",
-        land.amount() - land.cut_tax()
+        land.amount() - land.tax_amount()
     );
 }
