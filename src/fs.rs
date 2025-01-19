@@ -4,6 +4,7 @@ use tokio::io::{AsyncReadExt, AsyncSeekExt, Result, SeekFrom};
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    // READ
     // std fs
     let read = fs::read("./README.md")?;
     println!("STD: {:?}", String::from_utf8_lossy(&read));
@@ -37,6 +38,25 @@ async fn main() -> Result<()> {
     let _ = file.read_to_string(&mut str).await?;
 
     println!("As String: {:?}", str);
+
+    // Write
+    let mut file = tokio_fs::File::create("test.txt").await?;
+
+    let size = file.write(b"Hello Rust!").await?;
+
+    println!("Written bytes {}", size);
+
+    // Copy
+    let mut file = tokio_fs::File::open("./README.md").await?;
+
+    let mut buf = Vec::new();
+    file.read_to_end(&mut buf).await?;
+
+    let mut file2 = tokio_fs::File::create("./test.txt").await?;
+
+    let mut buf: &[u8] = &buf;
+
+    tokio::io::copy(&mut buf, &mut file2).await?;
 
     Ok(())
 }
