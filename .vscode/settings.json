@@ -15,5 +15,5 @@
   "editor.quickSuggestionsDelay": 10,
 
   // Enable word based suggestions
-  "editor.wordBasedSuggestions": false
+  "editor.wordBasedSuggestions": "off"
 }
