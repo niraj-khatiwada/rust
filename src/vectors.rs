@@ -33,6 +33,10 @@ fn vectors() {
         println!("{} {}", idx, item)
     }
 
+    for alphabet in 'a'..='z' {
+        println!("Alphabet = {}", alphabet);
+    }
+
     println!("Array {:?}", array);
     // Map
     let mapped: Vec<i32> = array.iter().map(|x| x + 1).collect(); // Map dereferences the ref value of .iter() automatically and gives you new vector on .collect()
@@ -41,6 +45,10 @@ fn vectors() {
     // Filter
     let filter: Vec<&i32> = array.iter().filter(|x| *x % 2 == 0).collect(); // Filter is just checking for conditions so it'll still refer to the original .iter() value upon .collect() unlike .map()
     println!("Filtered {:?}", filter);
+
+    // Take first 3: But better to use slice &array[0..3]
+    let first_3: Vec<i32> = array.iter().take(3).map(|x| *x).collect();
+    println!("First 3 {:?}", first_3);
 
     array.sort(); //sort occurs in-place
     println!("Array {:?}", array);
