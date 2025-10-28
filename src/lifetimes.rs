@@ -9,6 +9,12 @@ struct Wheel<'a> {
     owner: &'a Vehicle,
 }
 
+impl<'a> Wheel<'a> {
+    fn print_wheel_owner(&self) {
+        println!("Wheel Owner = {}", self.owner.name)
+    }
+}
+
 fn main() {
     let name = get_random_name();
     println!("{}", name);
@@ -22,6 +28,7 @@ fn main() {
             name: String::from("Stainless"),
             owner: &vehicle,
         };
+        wheel.print_wheel_owner();
         println!("{:?}", wheel);
         // Wheel drops here but vehicle still remains.
     }
