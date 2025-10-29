@@ -1,4 +1,4 @@
-fn vectors() {
+fn main() {
     let mut array: Vec<i32> = Vec::new();
 
     array.push(1);
@@ -52,4 +52,10 @@ fn vectors() {
 
     array.sort(); //sort occurs in-place
     println!("Array {:?}", array);
+
+    // Create vector from range
+    let list1: Vec<u32> = (0..=100).collect();
+    println!("{:?}", list1);
+    let list2: Vec<char> = ('a'..='z').collect();
+    println!("{:?}", list2);
 }
