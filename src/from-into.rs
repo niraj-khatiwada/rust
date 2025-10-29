@@ -57,6 +57,10 @@ fn main() {
     let owned_string = String::from("Niraj");
     let owned_string: String = "Niraj".into();
 
+    // For numbers conversion
+    let safe_unsigned_16_to_8: Result<u8, _> = (300u16).try_into(); // 300 is outside of u8 range 0..256 so it'll throw error.
+    println!("Safe u16 to u8{:?}", safe_unsigned_16_to_8);
+
     println!("{} {}", to_owned("Niraj"), type_of(to_owned("Niraj")));
 
     // Simple From/Into
